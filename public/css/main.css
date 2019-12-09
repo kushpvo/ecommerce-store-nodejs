@@ -1,0 +1,15 @@
+.container-form {
+  width: auto;
+  max-width: 700px;
+}
+
+.centered {
+  text-align: center;
+}
+
+.productImage {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+}
+

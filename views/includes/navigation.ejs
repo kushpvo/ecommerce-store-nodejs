@@ -1,0 +1,55 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="/">SHOP</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link <%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= path === '/products' ? 'active' : '' %>" href="/products">Products</a>
+          </li>
+          <% if (isAuthenticated) { %>
+            <li class="nav-item">
+              <a class="nav-link <%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Product</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products</a>
+            </li>
+          <% } %>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+         <% if (!isAuthenticated) { %>
+            <li class="nav-item">
+              <a class="nav-link <%= path === '/login' ? 'active' : '' %>" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <%= path === '/signup' ? 'active' : '' %>" href="/signup">Signup</a>
+            </li>
+          <% } else { %>
+            <li class="nav-item">
+              <form action="/logout" method="POST">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button type="submit" class="nav-link btn btn-link">Logout</button>
+              </form>
+            </li>
+          <% } %>
+        </ul>
+      </div>
+    </nav>

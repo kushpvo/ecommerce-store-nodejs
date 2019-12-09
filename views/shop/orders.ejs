@@ -1,0 +1,35 @@
+<%- include("../includes/head.ejs") %>
+  </head>
+
+  <body>
+    <%- include("../includes/navigation.ejs") %>
+    <main>
+        <div class="container p-4 h-100" style="text-align: center; max-width: 800px">
+            <% if (orders.length <= 0) { %>
+                <h1>No Orders Placed Yet!</h1>
+            <% } else { %>
+                <% orders.forEach(order => { %>
+                    <h5>#<%= order._id %> - <a href="/orders/<%= order._id %>" target="_blank">Invoice</a></h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product Title</th>
+                                <th scope="col">Product Price</th>
+                                <th scope="col">Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% order.products.forEach(p => { %>
+                                <tr>
+                                    <th scope="row"><%= p.product.title %></th>
+                                    <td>$<%= p.product.price %></td>
+                                    <td><%= p.quantity %></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                <% }); %>
+            <% } %>
+        </div>
+    </main>
+<%- include("../includes/end.ejs") %>

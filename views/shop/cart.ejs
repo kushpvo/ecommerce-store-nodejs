@@ -1,0 +1,43 @@
+<%- include("../includes/head.ejs") %>
+  </head>
+
+  <body>
+    <%- include("../includes/navigation.ejs") %>
+    <main class="container p-4 h-100" style="text-align: center">
+      <% if (products.length > 0) { %>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Product Title</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% products.forEach(p => { %>
+              <tr>
+                <th scope="row"><%= p.productId.title %></th>
+                <td><%= p.quantity %></td>
+                <td>
+                  <form class="d-inline" action="/cart-delete-item" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button  type="submit" class="btn btn-danger">
+                      <i class="fas fa-trash-alt"></i> Delete
+                    </button>
+                    <input type="hidden" value="<%= p.productId._id %>" name="productId">
+                  </form>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+        <!-- <form action="/create-order" method="POST">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="btn btn-lg btn-block btn-success">Order Now!</button>
+        </form> -->
+        <a href="/checkout" class="btn btn-lg btn-block btn-success" >Order Now!</a>
+      <% } else { %>
+      <h1>No products in Cart!</h1>
+      <% } %>
+    </main>
+<%- include("../includes/end.ejs") %>

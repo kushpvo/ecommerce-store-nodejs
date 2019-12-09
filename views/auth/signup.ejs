@@ -1,0 +1,57 @@
+<%- include("../includes/head.ejs") %>
+  </head>
+
+  <body>
+    <%- include("../includes/navigation.ejs") %>
+
+    <main>
+      <div class="container pt-5 container-form">
+        <% if (errorMessage.length > 0) { %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <%= errorMessage %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <% } %>
+        <form action="/signup" method="POST" novalidate>
+          <div class="form-group row">
+            <label for="name" class="col-sm-3 col-form-label">Name</label>
+            <div class="col-sm-9">
+              <input 
+                type="text" 
+                class="form-control <%= validationErrors.find(e => e.param === 'name') ? 'is-invalid' : '' %>" 
+                id="name" 
+                name="name" 
+                placeholder="Enter Full Name" 
+                value="<%= oldInput.name %>">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="email" class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-9">
+              <input type="email" class="form-control <%= validationErrors.find(e => e.param === 'email') ? 'is-invalid' : '' %>" id="email" name="email" placeholder="Enter Email" value="<%= oldInput.email %>">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="password" class="col-sm-3 col-form-label">Password</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control <%= validationErrors.find(e => e.param === 'password') ? 'is-invalid' : '' %>" id="password" name="password" placeholder="Enter Password" value="<%= oldInput.password %>">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="confirmPassword" class="col-sm-3 col-form-label">Confirm Password</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control <%= validationErrors.find(e => e.param === 'confirmPassword') ? 'is-invalid' : '' %>" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" value="<%= oldInput.confirmPassword %>">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-9">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="btn btn-primary">Signup</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+<%- include("../includes/end.ejs") %>

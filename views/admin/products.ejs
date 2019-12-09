@@ -1,0 +1,51 @@
+<%- include("../includes/head.ejs") %>
+  </head>
+
+  <body>
+    <%- include("../includes/navigation.ejs") %>
+
+    <main>
+      <div class="container p-4 h-100">
+        <% if (errorMessage.length > 0) { %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <%= errorMessage %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <% } %>
+        <% if (successMessage.length > 0) { %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <%= successMessage %>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+        <% } %>
+
+        <% if(products.length > 0) { %>
+            <div class="row">
+                <% products.forEach((product) => { %>
+                    <div class="col-sm pb-4">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="/<%= product.imageUrl %>">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= product.title %></h5>
+                                <h6 class="card-subtitle mb-2 text-muted">$<%= product.price %></h6>
+                                <p class="card-text"><%= product.description %></p>
+                                <a href="/admin/edit-product/<%= product._id %>?edit=true" class="btn btn-warning d-inline"><i class="fas fa-edit"></i> Edit</a>
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <input type="hidden" value="<%= product._id %>" name="productId">
+                                <button type="button" class="btn btn-danger" onclick="deleteProduct(this)"><i class="fas fa-trash-alt"></i> Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <h1>No Products Found!</h1>
+        <% } %>
+      </div>
+    </main>
+<%- include("../includes/end.ejs") %>
+<script src="/js/admin.js"></script>

@@ -1,0 +1,45 @@
+<%- include("../includes/head.ejs") %>
+  </head>
+
+  <body>
+    <%- include("../includes/navigation.ejs") %>
+
+    <main>
+        <main class="container p-4 h-100" style="text-align: center">
+            <% if (products.length > 0) { %>
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Product Title</th>
+                    <th scope="col">Quantity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% products.forEach(p => { %>
+                    <tr>
+                      <th scope="row"><%= p.productId.title %></th>
+                      <td><%= p.quantity %></td>
+                    </tr>
+                  <% }); %>
+                </tbody>
+              </table>
+              <div class="m-3">
+                <h2>Total: $<%= totalSum %></h2>
+              </div>
+              <form action="/create-order" method="POST">
+                <script
+                  src="https://checkout.stripe.com/checkout.js"
+                  class="stripe-button"
+                  data-key="pk_test_BYYPEixKTOrYN3X4i4KD8uaL"
+                  data-name="Your Order"
+                  data-description="All the items you ordered"
+                  data-amount="<%= totalSum * 100 %>"
+                  data-currency="usd">
+                </script>
+              </form>
+            <% } else { %>
+            <h1>No products in checkout!</h1>
+            <% } %>
+          </main>
+    </main>
+<%- include("../includes/end.ejs") %>
