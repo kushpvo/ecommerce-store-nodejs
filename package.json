@@ -8,12 +8,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "react-scripts start",
-    "start": "serve -s build",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "node app.js"
-},
+    "start": "node app.js",
+   "start:dev": "nodemon app.js"
+ },
   "author": "",
   "license": "ISC",
   "dependencies": {
