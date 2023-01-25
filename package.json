@@ -12,7 +12,7 @@
     "start": "serve -s build",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "node app.js"
 },
   "author": "",
   "license": "ISC",
